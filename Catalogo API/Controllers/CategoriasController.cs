@@ -2,6 +2,7 @@
 using Catalogo_API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Catalogo_API.Controllers;
 
@@ -33,5 +34,11 @@ public class CategoriasController : ControllerBase
         }
 
         return categoria;
+    }
+
+    [HttpGet("produtos")]
+    public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
+    {
+        return _context.Categorias.Include(p => p.Produtos).ToList();
     }
 }
