@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ApiLoggingFilter>();
+    options.Filters.Add<ApiExceptionFilter>();
 })
 .AddJsonOptions(options =>
     options.JsonSerializerOptions
