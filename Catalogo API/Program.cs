@@ -1,4 +1,5 @@
 using Catalogo_API.Context;
+using Catalogo_API.Logging;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -19,6 +20,11 @@ string? mySqlConnection = builder.Configuration.GetConnectionString("DefaultConn
 builder.Services.AddDbContext<CatalogoDbContext>(options =>
                         options.UseMySql(mySqlConnection, 
                         ServerVersion.AutoDetect(mySqlConnection)));
+
+builder.Logging.AddProvider(new CustomLoggerProvider(new CustomLoggerProviderConfiguration
+{
+    LogLevel = LogLevel.Information
+}));
 
 var app = builder.Build();
 
